@@ -44,7 +44,7 @@ langchain_bytez==0.0.7
 langsmith==0.3.45
 multidict==6.6.4
 openai==0.28.0
-opencv-python==4.12.0.88
+**opencv-python==4.9.0.80**
 packaging==25.0
 propcache==0.3.2
 proto-plus==1.26.1
@@ -79,6 +79,6 @@ zstandard==0.23.0
 google-generativeai==0.8.3
 Pillow==10.0.0
 numpy==1.24.3
-protobuf>=5.26.1,<6.0
+protobuf==5.26.1
 pyttsx3==2.90
 orjson==3.9.15
