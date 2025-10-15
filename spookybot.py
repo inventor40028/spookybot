@@ -27,7 +27,11 @@ import telegram.error
 from telegram.helpers import escape_markdown
 from concurrent.futures import ThreadPoolExecutor
 from dotenv import load_dotenv  # Add this import
-
+import asyncio
+import os
+import tempfile
+from gtts import gTTS
+from pydub import AudioSegment
 # Load .env at start
 load_dotenv()
 
@@ -5628,43 +5632,58 @@ def creepy_robot_tts(text, filename="robot_voice.mp3"):
         print(f"-> Robot TTS error: {e}")
         return None
 
+AudioSegment.converter = "/usr/bin/ffmpeg"
+
 async def auto_voice_message(message_obj, text: str, caption: str = ""):
-    """Automatically send voice message with given text"""
+    """Generate and send a creepy robotic voice message (async + host-safe)."""
     try:
-        # Convert text to robotic voice
-        audio_file = "auto_voice.mp3"
-        
-        # FIXED: Wrap creepy_robot_tts (non-blocking for pyttsx3)
-        async def wrapped_tts():
-            def sync_tts():
-                # Your creepy_robot_tts logic (pyttsx3 robotic)
-                engine = pyttsx3.init()
-                voices = engine.getProperty('voices')
-                engine.setProperty('voice', voices[0].id)  # Creepy voice
-                engine.setProperty('rate', 120)  # Slow robotic
-                engine.setProperty('volume', 0.9)
-                engine.save_to_file(text, audio_file)
-                engine.runAndWait()  # Blocker wrapped
-                return os.path.exists(audio_file)
-            
-            return await asyncio.to_thread(sync_tts)
-        
-        result = await wrapped_tts()
-        
+        # Create temporary MP3 path
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as tmp_mp3:
+            mp3_path = tmp_mp3.name
+
+        # === Step 1: Generate base creepy voice (Google TTS) ===
+        def generate_tts():
+            tts = gTTS(text=text, lang="en", slow=True)  # slow gives robotic tone
+            tts.save(mp3_path)
+            return os.path.exists(mp3_path)
+
+        # Run TTS in background (non-blocking)
+        result = await asyncio.to_thread(generate_tts)
+
         if result:
-            # Send as voice message using the correct method
-            with open(audio_file, 'rb') as voice_file:
-                await message_obj.reply_voice(
-                    voice=voice_file,
-                    caption=caption
-                )
-            # Clean up
-            os.remove(audio_file)
+            # Prepare OGG path for Telegram
+            ogg_path = mp3_path.replace(".mp3", ".ogg")
+
+            # === Step 2: Add creepy effects with pydub ===
+            sound = AudioSegment.from_file(mp3_path)
+
+            # Slow down & lower pitch slightly
+            slowed = sound._spawn(sound.raw_data, overrides={
+                "frame_rate": int(sound.frame_rate * 0.8)
+            }).set_frame_rate(sound.frame_rate)
+
+            # Add low-pass filter (muffled robotic tone) + fade in/out
+            creepy = slowed.low_pass_filter(4000).fade_in(250).fade_out(350)
+
+            # Export final version as .ogg for Telegram
+            creepy.export(ogg_path, format="ogg")
+
+            # === Step 3: Send voice message ===
+            with open(ogg_path, "rb") as voice_file:
+                await message_obj.reply_voice(voice=voice_file, caption=caption)
+
+            # === Step 4: Clean up temp files ===
+            for f in [mp3_path, ogg_path]:
+                if os.path.exists(f):
+                    os.remove(f)
+
             return True
+
     except Exception as e:
         print(f"-> Auto voice error: {e}")
         import traceback
         traceback.print_exc()
+
     return False
     
     # ===== MENU COMMAND =====
@@ -12745,6 +12764,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
