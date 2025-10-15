@@ -5664,7 +5664,7 @@ async def auto_voice_message(message_obj, text: str, caption: str = ""):
 
             # Add low-pass filter (muffled robotic tone) + fade in/out
             creepy = slowed.low_pass_filter(4000).fade_in(250).fade_out(350)
-
+            creepy = creepy.set_frame_rate(16000).set_channels(1)
             # Export final version as .ogg for Telegram
             creepy.export(ogg_path, format="ogg")
 
@@ -7153,39 +7153,58 @@ def format_monster_profile(monster):
 *Your nightmare has been given form!* 👹
 """
 
+from io import BytesIO
+import requests
+
 def generate_monster_image(monster):
-    """Generate monster image using dark magic - WORKING VERSION"""
+    """Generate monster image using dark magic - STABLE FIXED VERSION"""
     try:
         print(f"-> Giving form to your nightmare: {monster['name']}...")
-        
-        prompt = f"terrifying horror monster: {monster['name']}. Appearance: {monster.get('appearance', 'mysterious dark creature')}. Style: dark fantasy, creepy, horror art, cinematic lighting, highly detailed, digital painting, atmospheric, scary, monster, 4k, ultra detailed"
-        
+
+        # Create prompt for the Bytez AI model
+        prompt = (
+            f"terrifying horror monster: {monster['name']}. "
+            f"Appearance: {monster.get('appearance', 'mysterious dark creature')}. "
+            "Style: dark fantasy, creepy, horror art, cinematic lighting, highly detailed, "
+            "digital painting, atmospheric, scary, monster, 4k, ultra detailed"
+        )
+
         print(f"-> Whispering to the void: {prompt[:100]}...")
-        
+
         # Summon the darkness
-        sdk = Bytez(BYTEZ_API_KEY)        
+        sdk = Bytez(BYTEZ_API_KEY)
         model = sdk.model("stabilityai/stable-diffusion-xl-base-1.0")
-        
+
         # Channel the ancient powers
         error, output = model.run(prompt)
-        
-        # The void answers with visions
-        if error and error.startswith('https://'):
+
+        # === The void answers with visions ===
+        image_url = None
+        if error and isinstance(error, str) and error.startswith("https://"):
+            image_url = error
+        elif isinstance(output, dict) and "url" in output:
+            image_url = output["url"]
+
+        if image_url:
             print("-> The darkness has taken form!")
-            print(f"-> Vision from beyond: {error}")
-            
-            # Capture the nightmare
-            response = requests.get(error, timeout=30)
-            if response.status_code == 200:
-                image_data = BytesIO(response.content)
-                return image_data
-            else:
-                print(f"-> Failed to capture the vision: {response.status_code}")
+            print(f"-> Vision from beyond: {image_url}")
+
+            try:
+                response = requests.get(image_url, timeout=30)
+                if response.status_code == 200:
+                    print("-> The nightmare is complete. Behold your monster.")
+                    return BytesIO(response.content)
+                else:
+                    print(f"-> Failed to capture the vision: {response.status_code}")
+                    return None
+            except Exception as e:
+                print(f"-> Error capturing the vision: {e}")
                 return None
+
         else:
             print(f"-> The void remained silent: {error}")
             return None
-            
+
     except Exception as e:
         print(f"-> Ancient magic failed: {e}")
         return None
@@ -12764,6 +12783,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
