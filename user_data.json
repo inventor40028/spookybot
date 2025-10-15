@@ -1,0 +1,76 @@
+{
+  "7351537370": {
+    "usage": {
+      "transformations": 0,
+      "stories": 1,
+      "last_reset": "2025-10-14"
+    },
+    "premium": {
+      "active": true,
+      "type": "Admin Grant - 7 days (default)",
+      "expires_at": "2025-10-21T19:23:46.448688",
+      "purchases": [
+        {
+          "type": "Admin Grant - 7 days (default)",
+          "purchased_at": "2025-10-14T19:23:46.448688",
+          "expires_at": "2025-10-21T19:23:46.448688"
+        }
+      ]
+    },
+    "first_name": "Brian",
+    "username": "electrokid_1",
+    "last_seen": "2025-10-15T01:04:38.888930",
+    "achievements": {
+      "unlocked": [],
+      "progress": {
+        "transformations": 0,
+        "stories": 0,
+        "challenge_wins": 0,
+        "members_helped": 0,
+        "leaderboard_top3": 0,
+        "rpg_adventures": 0,
+        "monsters_created": 0
+      }
+    }
+  },
+  "8287395408": {
+    "rpg_character": {
+      "name": "Red the Occult Scholar",
+      "class": "Occult Scholar",
+      "level": 1,
+      "experience": 0,
+      "fear_resistance": 10,
+      "sanity": 100,
+      "inventory": [],
+      "location": "haunted_mansion",
+      "knowledge": 10,
+      "magic": 8
+    },
+    "rpg_inventory": [
+      "Flashlight 🔦"
+    ],
+    "rpg_location": "Shadow Forest 🌲",
+    "rpg_achievements": [],
+    "usage": {
+      "transformations": 0,
+      "stories": 0,
+      "last_reset": "2025-10-14"
+    },
+    "last_transform_style": "vampire",
+    "premium": {
+      "active": true,
+      "type": "Admin Grant - 7 days (default)",
+      "expires_at": "2025-10-21T19:31:36.505604",
+      "purchases": [
+        {
+          "type": "Admin Grant - 7 days (default)",
+          "purchased_at": "2025-10-14T19:31:36.505604",
+          "expires_at": "2025-10-21T19:31:36.505604"
+        }
+      ]
+    },
+    "first_name": "Red",
+    "username": "Redlady12",
+    "last_seen": "2025-10-14T21:58:52.746043"
+  }
+}

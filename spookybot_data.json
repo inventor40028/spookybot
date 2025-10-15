@@ -1,0 +1,40 @@
+{
+  "8287395408": {
+    "nickname": null,
+    "premium": {
+      "active": false,
+      "type": null,
+      "expires_at": null
+    },
+    "rpg_character": {
+      "name": "Simer",
+      "class": "Cursed Survivor",
+      "class_key": "cursed_survivor",
+      "level": 1,
+      "experience": 0,
+      "fear_resistance": 50,
+      "sanity": 100,
+      "health": 100
+    },
+    "rpg_inventory": [
+      "Flashlight \ud83d\udd26"
+    ],
+    "rpg_location": "Shadow Forest \ud83c\udf32",
+    "usage": {
+      "transformations": 0,
+      "stories": 0,
+      "last_reset": "2025-10-09"
+    },
+    "rpg_leaderboard": {
+      "total_exp": 0,
+      "quests_completed": 0,
+      "monsters_defeated": 0,
+      "items_collected": 0,
+      "items_crafted": 0,
+      "survival_time": 0,
+      "achievements": []
+    },
+    "rpg_achievements": [],
+    "created_monsters": []
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "-1003176015564": {
+    "status": "inactive",
+    "teams": {
+      "ghosts": {
+        "members": [
+          {
+            "id": "7351537370",
+            "name": "Brian",
+            "role": "Wraith"
+          }
+        ],
+        "hp": 887,
+        "damage": 17
+      },
+      "zombies": {
+        "members": [
+          {
+            "id": "8287395408",
+            "name": "Red",
+            "role": "Specter"
+          }
+        ],
+        "hp": 963,
+        "damage": 98
+      }
+    },
+    "cooldowns": {
+      "7351537370": "2025-10-13T19:35:15.056473+00:00",
+      "8287395408": "2025-10-13T19:37:28.355097+00:00"
+    },
+    "started_at": "2025-10-13T19:34:59.916560+00:00",
+    "end_at": "2025-10-13T19:37:59.934128+00:00",
+    "actions": {
+      "7351537370": {
+        "ultimate_blast": false,
+        "steal_health": false,
+        "dark_pulse": false,
+        "hex_curse": false,
+        "spectral_rush": false,
+        "fear_aura": false,
+        "grave_pact": false,
+        "phantom_strike": false,
+        "doom_shroud": false,
+        "blood_surge": false,
+        "ghostly_swap": false,
+        "reaper_call": false,
+        "shadow_bolt": false,
+        "vile_mist": false,
+        "spirit_siphon": false,
+        "dread_echo": false,
+        "haunted_mark": false,
+        "chill_touch": false,
+        "spirit_burst": false,
+        "haunt": true
+      },
+      "8287395408": {
+        "ultimate_blast": false,
+        "steal_health": false,
+        "dark_pulse": false,
+        "hex_curse": false,
+        "spectral_rush": false,
+        "fear_aura": true,
+        "grave_pact": true,
+        "phantom_strike": true,
+        "doom_shroud": false,
+        "blood_surge": false,
+        "ghostly_swap": false,
+        "reaper_call": false,
+        "shadow_bolt": false,
+        "vile_mist": false,
+        "spirit_siphon": false,
+        "dread_echo": false,
+        "haunted_mark": false,
+        "chill_touch": false,
+        "spirit_burst": false
+      }
+    },
+    "events": {
+      "blood_moon_until": "2025-10-13T19:38:07.290800+00:00",
+      "reaper": null,
+      "soul_bind": null,
+      "hex_curse": null,
+      "doom_shroud": null,
+      "fear_aura": {
+        "team": "ghosts",
+        "until": "2025-10-13T19:37:36.829789+00:00"
+      },
+      "blood_surge": null,
+      "haunted_mark": null,
+      "chill_touch": null
+    }
+  }
+}

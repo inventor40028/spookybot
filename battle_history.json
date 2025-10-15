@@ -1,0 +1,394 @@
+[
+  {
+    "chat": "-1003176015564",
+    "started_at": "2025-10-13T06:42:15.398400+00:00",
+    "ended_at": "2025-10-13T06:45:15.402753+00:00",
+    "winner": "zombies",
+    "ghosts_hp": 171,
+    "zombies_hp": 200,
+    "ghosts_damage": 8,
+    "zombies_damage": 37,
+    "ghosts_members": [
+      {
+        "id": "7351537370",
+        "name": "Brian",
+        "role": "Ghoul"
+      }
+    ],
+    "zombies_members": [
+      {
+        "id": "8287395408",
+        "name": "Red",
+        "role": "Necromancer"
+      }
+    ],
+    "events": {
+      "blood_moon_until": null,
+      "reaper": null
+    }
+  },
+  {
+    "chat": "-1003176015564",
+    "started_at": "2025-10-13T07:00:40.766828+00:00",
+    "ended_at": "2025-10-13T07:03:40.779901+00:00",
+    "winner": "ghosts",
+    "ghosts_hp": 161,
+    "zombies_hp": 136,
+    "ghosts_damage": 44,
+    "zombies_damage": 24,
+    "ghosts_members": [
+      {
+        "id": "7351537370",
+        "name": "Brian",
+        "role": "Specter"
+      }
+    ],
+    "zombies_members": [
+      {
+        "id": "8287395408",
+        "name": "Red",
+        "role": "Specter"
+      }
+    ],
+    "events": {
+      "blood_moon_until": "2025-10-13T07:02:30.993085+00:00",
+      "reaper": null
+    }
+  },
+  {
+    "chat": "-1003176015564",
+    "started_at": "2025-10-13T07:09:28.327808+00:00",
+    "ended_at": "2025-10-13T07:12:28.337665+00:00",
+    "winner": "tie",
+    "ghosts_hp": 180,
+    "zombies_hp": 180,
+    "ghosts_damage": 0,
+    "zombies_damage": 0,
+    "ghosts_members": [
+      {
+        "id": "7351537370",
+        "name": "Brian",
+        "role": "Specter"
+      }
+    ],
+    "zombies_members": [],
+    "events": {
+      "blood_moon_until": null,
+      "reaper": {
+        "hp": 80,
+        "spawned_at": "2025-10-13T07:12:05.372350+00:00",
+        "deadline": "2025-10-13T07:12:35.372375+00:00",
+        "last_hit_by": null
+      }
+    }
+  },
+  {
+    "chat": "-1003176015564",
+    "started_at": "2025-10-13T07:14:40.957325+00:00",
+    "ended_at": "2025-10-13T07:17:40.975558+00:00",
+    "winner": "tie",
+    "ghosts_hp": 200,
+    "zombies_hp": 200,
+    "ghosts_damage": 0,
+    "zombies_damage": 0,
+    "ghosts_members": [],
+    "zombies_members": [],
+    "events": {
+      "blood_moon_until": null,
+      "reaper": null
+    }
+  },
+  {
+    "chat": "-1003176015564",
+    "started_at": "2025-10-13T07:36:16.012911+00:00",
+    "ended_at": "2025-10-13T07:39:16.023148+00:00",
+    "winner": "zombies",
+    "ghosts_hp": 144,
+    "zombies_hp": 176,
+    "ghosts_damage": 25,
+    "zombies_damage": 44,
+    "ghosts_members": [
+      {
+        "id": "7351537370",
+        "name": "Brian",
+        "role": "Specter"
+      }
+    ],
+    "zombies_members": [
+      {
+        "id": "8287395408",
+        "name": "Red",
+        "role": "Specter"
+      }
+    ],
+    "events": {
+      "blood_moon_until": null,
+      "reaper": null
+    }
+  },
+  {
+    "chat": "-1003176015564",
+    "started_at": "2025-10-13T07:54:24.658319+00:00",
+    "ended_at": "2025-10-13T07:57:17.576843+00:00",
+    "winner": "zombies",
+    "ghosts_hp": 162,
+    "zombies_hp": 200,
+    "ghosts_damage": 0,
+    "zombies_damage": 38,
+    "ghosts_members": [
+      {
+        "id": "7351537370",
+        "name": "Brian",
+        "role": "Necromancer"
+      }
+    ],
+    "zombies_members": [
+      {
+        "id": "8287395408",
+        "name": "Red",
+        "role": "Specter"
+      }
+    ],
+    "events": {
+      "blood_moon_until": null,
+      "reaper": null
+    }
+  },
+  {
+    "chat": "-1003176015564",
+    "started_at": "2025-10-13T08:03:23.842105+00:00",
+    "ended_at": "2025-10-13T08:06:23.849402+00:00",
+    "winner": "zombies",
+    "ghosts_hp": 130,
+    "zombies_hp": 175,
+    "ghosts_damage": 0,
+    "zombies_damage": 45,
+    "ghosts_members": [
+      {
+        "id": "7351537370",
+        "name": "Brian",
+        "role": "Specter"
+      }
+    ],
+    "zombies_members": [
+      {
+        "id": "8287395408",
+        "name": "Red",
+        "role": "Ghoul"
+      }
+    ],
+    "events": {
+      "blood_moon_until": "2025-10-13T08:05:46.123734+00:00",
+      "reaper": null
+    }
+  },
+  {
+    "chat": "-1003176015564",
+    "started_at": "2025-10-13T09:18:51.595924+00:00",
+    "ended_at": "2025-10-13T09:21:52.113277+00:00",
+    "winner": "ghosts",
+    "ghosts_hp": 145,
+    "zombies_hp": 109,
+    "ghosts_damage": 36,
+    "zombies_damage": 0,
+    "ghosts_members": [
+      {
+        "id": "8287395408",
+        "name": "Red",
+        "role": "Necromancer"
+      }
+    ],
+    "zombies_members": [],
+    "events": {
+      "blood_moon_until": null,
+      "reaper": null,
+      "soul_bind": null,
+      "hex_curse": null,
+      "doom_shroud": null,
+      "fear_aura": null,
+      "blood_surge": null,
+      "haunted_mark": null,
+      "chill_touch": null
+    }
+  },
+  {
+    "chat": "-1003176015564",
+    "started_at": "2025-10-13T09:29:12.683671+00:00",
+    "ended_at": "2025-10-13T09:32:12.695672+00:00",
+    "winner": "zombies",
+    "ghosts_hp": 175,
+    "zombies_hp": 181,
+    "ghosts_damage": 9,
+    "zombies_damage": 0,
+    "ghosts_members": [
+      {
+        "id": "7351537370",
+        "name": "Brian",
+        "role": "Wraith"
+      }
+    ],
+    "zombies_members": [
+      {
+        "id": "8287395408",
+        "name": "Red",
+        "role": "Ghoul"
+      }
+    ],
+    "events": {
+      "blood_moon_until": null,
+      "reaper": null,
+      "soul_bind": null,
+      "hex_curse": null,
+      "doom_shroud": null,
+      "fear_aura": null,
+      "blood_surge": null,
+      "haunted_mark": null,
+      "chill_touch": null,
+      "vile_mist": {
+        "team": "ghosts",
+        "until": "2025-10-13T09:31:32.486088+00:00"
+      }
+    }
+  },
+  {
+    "chat": "-1003176015564",
+    "started_at": "2025-10-13T10:01:41.456173+00:00",
+    "ended_at": "2025-10-13T10:04:41.470481+00:00",
+    "winner": "tie",
+    "ghosts_hp": 985,
+    "zombies_hp": 985,
+    "ghosts_damage": 0,
+    "zombies_damage": 0,
+    "ghosts_members": [
+      {
+        "id": "8287395408",
+        "name": "Red",
+        "role": "Necromancer"
+      }
+    ],
+    "zombies_members": [
+      {
+        "id": "7351537370",
+        "name": "Brian",
+        "role": "Specter"
+      }
+    ],
+    "events": {
+      "blood_moon_until": "2025-10-13T10:02:49.477913+00:00",
+      "reaper": {
+        "hp": 80,
+        "spawned_at": "2025-10-13T10:04:35.564492+00:00",
+        "deadline": "2025-10-13T10:05:05.565116+00:00",
+        "last_hit_by": null
+      },
+      "soul_bind": null,
+      "hex_curse": null,
+      "doom_shroud": null,
+      "fear_aura": null,
+      "blood_surge": null,
+      "haunted_mark": null,
+      "chill_touch": null
+    }
+  },
+  {
+    "chat": "-1003176015564",
+    "started_at": "2025-10-13T10:07:13.916456+00:00",
+    "ended_at": "2025-10-13T10:10:13.923281+00:00",
+    "winner": "zombies",
+    "ghosts_hp": 930,
+    "zombies_hp": 985,
+    "ghosts_damage": 0,
+    "zombies_damage": 55,
+    "ghosts_members": [],
+    "zombies_members": [
+      {
+        "id": "7351537370",
+        "name": "Brian",
+        "role": "Wraith"
+      },
+      {
+        "id": "8287395408",
+        "name": "Red",
+        "role": "Ghoul"
+      }
+    ],
+    "events": {
+      "blood_moon_until": "2025-10-13T10:09:07.989030+00:00",
+      "reaper": null,
+      "soul_bind": null,
+      "hex_curse": null,
+      "doom_shroud": null,
+      "fear_aura": null,
+      "blood_surge": null,
+      "haunted_mark": null,
+      "chill_touch": null
+    }
+  },
+  {
+    "chat": "-1003176015564",
+    "started_at": "2025-10-13T13:28:48.111978+00:00",
+    "ended_at": "2025-10-13T13:31:48.130990+00:00",
+    "winner": "ghosts",
+    "ghosts_hp": 993,
+    "zombies_hp": 928,
+    "ghosts_damage": 57,
+    "zombies_damage": 0,
+    "ghosts_members": [
+      {
+        "id": "8287395408",
+        "name": "Red",
+        "role": "Wraith"
+      }
+    ],
+    "zombies_members": [],
+    "events": {
+      "blood_moon_until": null,
+      "reaper": null,
+      "soul_bind": null,
+      "hex_curse": null,
+      "doom_shroud": null,
+      "fear_aura": null,
+      "blood_surge": null,
+      "haunted_mark": null,
+      "chill_touch": null
+    }
+  },
+  {
+    "chat": "-1003176015564",
+    "started_at": "2025-10-13T19:34:59.916560+00:00",
+    "ended_at": "2025-10-13T19:37:59.934128+00:00",
+    "winner": "zombies",
+    "ghosts_hp": 887,
+    "zombies_hp": 963,
+    "ghosts_damage": 17,
+    "zombies_damage": 98,
+    "ghosts_members": [
+      {
+        "id": "7351537370",
+        "name": "Brian",
+        "role": "Wraith"
+      }
+    ],
+    "zombies_members": [
+      {
+        "id": "8287395408",
+        "name": "Red",
+        "role": "Specter"
+      }
+    ],
+    "events": {
+      "blood_moon_until": "2025-10-13T19:38:07.290800+00:00",
+      "reaper": null,
+      "soul_bind": null,
+      "hex_curse": null,
+      "doom_shroud": null,
+      "fear_aura": {
+        "team": "ghosts",
+        "until": "2025-10-13T19:37:36.829789+00:00"
+      },
+      "blood_surge": null,
+      "haunted_mark": null,
+      "chill_touch": null
+    }
+  }
+]
