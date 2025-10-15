@@ -6362,8 +6362,9 @@ async def enhanced_scare_leaderboard(update: Update, context: ContextTypes.DEFAU
         return
     
     leaderboard = init_group_leaderboard(chat_id)
-    tier_lines = [f'{tier_info["color"]} {points}+: {tier_info["title"]}' for points, tier_info in SCARE_TIERS.items()]
+    
     if not leaderboard:
+        tier_lines = [f'{tier_info["color"]} {points}+: {tier_info["title"]}' for points, tier_info in SCARE_TIERS.items()]
         await update.message.reply_text(
             "🏆 *SCARE LEADERBOARD* 👻\n\n"
             "No scares recorded yet! Be the first to earn scare points and climb the tiers!\n\n"
@@ -12744,4 +12745,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
