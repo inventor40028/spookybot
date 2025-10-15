@@ -28,7 +28,8 @@ from telegram.helpers import escape_markdown
 from concurrent.futures import ThreadPoolExecutor
 from dotenv import load_dotenv  # Add this import
 
-
+# Load .env at start
+load_dotenv()
 
 executor = ThreadPoolExecutor(max_workers=8)
 # ===== CONFIG =====
@@ -12709,7 +12710,6 @@ def main():
         app.add_handler(MessageHandler(filters.CAPTION & filters.ChatType.GROUPS, delete_links))
        
         # ===== MESSAGE HANDLERS =====
-        app.add_error_handler(error_handler)
         app.add_handler(MessageHandler(filters.PHOTO, handle_photo_message))
         app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
         app.add_handler(MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, welcome_message))
