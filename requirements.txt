@@ -84,5 +84,3 @@ pyttsx3==2.90
 orjson==3.9.15
 gTTS
 pydub
-audioop-lts
-
