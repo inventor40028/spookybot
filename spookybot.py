@@ -27,11 +27,7 @@ import telegram.error
 from telegram.helpers import escape_markdown
 from concurrent.futures import ThreadPoolExecutor
 from dotenv import load_dotenv  # Add this import
-import asyncio
-import os
-import tempfile
-from gtts import gTTS
-from pydub import AudioSegment
+
 # Load .env at start
 load_dotenv()
 
@@ -4327,56 +4323,6 @@ async def auto_end_battle_job(context: ContextTypes.DEFAULT_TYPE):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # ===== GHOSTS • WIZARDS • TROLLS MINI-GAME =====
 # ===== GHOSTS • WIZARDS • TROLLS MINI-GAME =====
 GWT_COOLDOWN = {}  # {user_id: datetime of last play}
@@ -5328,7 +5274,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     save_user_data()
 
     # ===== Initialize user data safely =====
-    if user_id not in user_data:
+    is_new = user_id not in user_data
+    if is_new:
         user_data[user_id] = {
             'nickname': username,
             'joined': datetime.now().isoformat(),
@@ -5369,13 +5316,19 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         start_text = (
             f"🕯️ <b>Welcome back, {username}</b>\n\n"
+            "You’ve stepped into the shadows of <b>SpookyBot</b> 👻\n"
+            "Where nightmares whisper and only the brave survive.\n\n"
+            " JOIN OUR GROUP https://t.me/spookynightland \n\n"
             f"The darkness remembers you... 🌘\n"
             "💫 <b>Your Status:</b> " + tier + "\n\n"
-            "Continue your path:\n"
+            "🕯️ <b>Commands you can try:</b>\n"
+            "• /story — summon haunting tales 📖\n"
+            "• /transform — transform your photo into horror 😈\n"
             "• /games — play games ⚔️\n"
-            "• /transform — unleash more transformations 👁️\n"
-            "• /story — summon more nightmares 📚\n"
+            "• /addscare — earn group scare points 👻\n"
+            "• /menu — explore all powers 🧙\n\n"
             "• /premium — check your power 👑"
+            "💀 Ready to descend into the unknown?\n"
         )
 
     # Send text first
@@ -5632,58 +5585,43 @@ def creepy_robot_tts(text, filename="robot_voice.mp3"):
         print(f"-> Robot TTS error: {e}")
         return None
 
-AudioSegment.converter = "/usr/bin/ffmpeg"
-
 async def auto_voice_message(message_obj, text: str, caption: str = ""):
-    """Generate and send a creepy robotic voice message (async + host-safe)."""
+    """Automatically send voice message with given text"""
     try:
-        # Create temporary MP3 path
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as tmp_mp3:
-            mp3_path = tmp_mp3.name
-
-        # === Step 1: Generate base creepy voice (Google TTS) ===
-        def generate_tts():
-            tts = gTTS(text=text, lang="en", slow=True)  # slow gives robotic tone
-            tts.save(mp3_path)
-            return os.path.exists(mp3_path)
-
-        # Run TTS in background (non-blocking)
-        result = await asyncio.to_thread(generate_tts)
-
+        # Convert text to robotic voice
+        audio_file = "auto_voice.mp3"
+        
+        # FIXED: Wrap creepy_robot_tts (non-blocking for pyttsx3)
+        async def wrapped_tts():
+            def sync_tts():
+                # Your creepy_robot_tts logic (pyttsx3 robotic)
+                engine = pyttsx3.init()
+                voices = engine.getProperty('voices')
+                engine.setProperty('voice', voices[0].id)  # Creepy voice
+                engine.setProperty('rate', 120)  # Slow robotic
+                engine.setProperty('volume', 0.9)
+                engine.save_to_file(text, audio_file)
+                engine.runAndWait()  # Blocker wrapped
+                return os.path.exists(audio_file)
+            
+            return await asyncio.to_thread(sync_tts)
+        
+        result = await wrapped_tts()
+        
         if result:
-            # Prepare OGG path for Telegram
-            ogg_path = mp3_path.replace(".mp3", ".ogg")
-
-            # === Step 2: Add creepy effects with pydub ===
-            sound = AudioSegment.from_file(mp3_path)
-
-            # Slow down & lower pitch slightly
-            slowed = sound._spawn(sound.raw_data, overrides={
-                "frame_rate": int(sound.frame_rate * 0.8)
-            }).set_frame_rate(sound.frame_rate)
-
-            # Add low-pass filter (muffled robotic tone) + fade in/out
-            creepy = slowed.low_pass_filter(4000).fade_in(250).fade_out(350)
-            creepy = creepy.set_frame_rate(16000).set_channels(1)
-            # Export final version as .ogg for Telegram
-            creepy.export(ogg_path, format="ogg")
-
-            # === Step 3: Send voice message ===
-            with open(ogg_path, "rb") as voice_file:
-                await message_obj.reply_voice(voice=voice_file, caption=caption)
-
-            # === Step 4: Clean up temp files ===
-            for f in [mp3_path, ogg_path]:
-                if os.path.exists(f):
-                    os.remove(f)
-
+            # Send as voice message using the correct method
+            with open(audio_file, 'rb') as voice_file:
+                await message_obj.reply_voice(
+                    voice=voice_file,
+                    caption=caption
+                )
+            # Clean up
+            os.remove(audio_file)
             return True
-
     except Exception as e:
         print(f"-> Auto voice error: {e}")
         import traceback
         traceback.print_exc()
-
     return False
     
     # ===== MENU COMMAND =====
@@ -5720,6 +5658,7 @@ async def menu_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "🎃 *SPOOKYBOT MAIN MENU* 👻\n\n"
         "*Choose your path to terror:*\n\n"
+        " JOIN OUR GROUP https://t.me/spookynightland \n\n"
         "🧛 **Transformations** - Turn photos into monsters\n"
         "📖 **Horror Stories** - AI-generated scary tales\n"
         "⚔️ **RPG Game** - Horror adventure game\n"
@@ -5729,10 +5668,69 @@ async def menu_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "💫 **PREMIUM** - Unlock unlimited features\n\n"
         "🆘 **SUPPORT** - Get help & report issues\n\n"
         "🤭 **MORE COMMANDS** - USE /help to get all features\n\n"
+        " JOIN OUR GROUP https://t.me/spookynightland \n\n"
         "_Select a category below:_ 🔮",
         reply_markup=reply_markup,
         parse_mode='HTML'
     )
+
+
+
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto
+
+# === /share Command ===
+async def share_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Send a spooky share poster + caption for users to share."""
+    try:
+        bot_username = (await context.bot.get_me()).username
+
+        caption = (
+            f"🎃 **SPOOKYBOT: YOUR DARK COMPANION** 🕯️\n"
+            f"Chat at your own risk...\n\n"
+            f"👻 *Horror Stories | Monster Creation | Transformation Mode | Creepy Voices | Games*\n\n"
+            f"Summon the darkness now:\n👉 https://t.me/SpookyNightBot \n"
+            f"#SpookyBot #HorrorAI #ChatAtYourOwnRisk"
+        )
+
+        # Use your Telegram-hosted poster (file_id)
+        spooky_poster_url = "https://i.postimg.cc/V6mBWvk4/Chat-GPT-Image-Oct-16-2025-04-18-10-PM.pngg"
+
+        keyboard = InlineKeyboardMarkup([
+            [InlineKeyboardButton("🕯️ Summon SpookyBot", url=f"https://t.me/SpookyNightBot")]
+        ])
+
+        await update.message.reply_photo(
+            photo=spooky_poster_url,
+            caption=caption,
+            parse_mode='Markdown',
+            reply_markup=keyboard
+        )
+
+    except Exception as e:
+        print(f"-> Share command error: {e}")
+        await update.message.reply_text("😈 Something went wrong sharing the darkness...")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 async def menu_button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Handle ALL menu button clicks"""
@@ -5939,16 +5937,16 @@ async def transform_panel(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Display transformation menu that auto-deletes after 15s."""
     chat_id = update.effective_chat.id
     message = await update.message.reply_text(
-        "*Available Commands:*"
-        "• `/ghost` - Ghostly spirit"
-        "• `/zombie` - Zombie apocalypse  "
-        "• `/monster` - Grotesque monster"
-        "• `/werewolf` - Beast transformation"
-        "• `/demon` - Infernal demon"
-        "• `/witch` - Dark witch"
-        "• `/eldritch` - Cosmic horror"
-        "• `/custom [prompt]` - Create your own horror"
-        "_Choose wisely... not all forms can return._",
+        "*Available Commands:\n*"
+        "• /ghost - Ghostly spirit\n"
+        "• /zombie - Zombie apocalypse\n  "
+        "• /monster - Grotesque monster\n"
+        "• /werewolf - Beast transformation\n"
+        "• /demon - Infernal demon\n"
+        "• /witch - Dark witch\n"
+        "• /eldritch - Cosmic horror\n"
+        "• /custom [prompt] - Create your own horror\n"
+        "_Choose wisely... not all forms can return._\n",
         parse_mode="Markdown"
     )
 
@@ -6256,7 +6254,13 @@ async def witch_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def custom_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Allow users to create their own custom horror transformations"""
     user_id = str(update.effective_user.id)
-    
+    chat_id = str(update.effective_chat.id)
+    # Restrict to private chats only
+    if int(chat_id) < 0:
+        await update.message.reply_text("command works privately @spookynightbot")
+        return
+
+
     # PREMIUM CHECK
     if not is_premium_user(user_id):
         await update.message.reply_text(
@@ -6314,7 +6318,28 @@ async def custom_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         print("-> Photo sent WITH custom command!")
         await process_custom_photo(update, context)
         return
-    
+
+
+
+    now = datetime.now()
+    cooldown_time = timedelta(minutes=4) if is_premium_user(user_id) else timedelta(minutes=10)
+
+    if user_id in TRANSFORM_COOLDOWN:
+        next_time = TRANSFORM_COOLDOWN[user_id]
+        if now < next_time:
+            remaining = (next_time - now).seconds
+            minutes = remaining // 60
+            seconds = remaining % 60
+            await update.message.reply_text(
+                f"⏳ Please wait {minutes}m {seconds}s before transforming another image.\n"
+                f"The dark magic needs to recharge... 🔮",
+                parse_mode="HTML"
+            )
+            return
+
+    # Set next available time
+    TRANSFORM_COOLDOWN[user_id] = now + cooldown_time
+
     # No photo yet - ask user to send one
     print("-> No photo detected, asking user to send photo...")
     photo_requests[user_id] = True
@@ -6381,7 +6406,6 @@ async def enhanced_scare_leaderboard(update: Update, context: ContextTypes.DEFAU
         return
     
     leaderboard = init_group_leaderboard(chat_id)
-    
     if not leaderboard:
         tier_lines = [f"{tier_info['color']} {points}+: {tier_info['title']}" for points, tier_info in SCARE_TIERS.items()]
         await update.message.reply_text(
@@ -6463,13 +6487,13 @@ async def welcome_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 username = f"@{member.username}"
             
             welcome_messages = [
-                f"👻 WELCOME {username} TO THE SPOOKY CREW! 🎃\n\nWho's ready to get haunted? Let's see some:\n• SpookyBot transformations! 🎭\n• Horror stories! 📖\n• Scare challenge entries! ⚡\n\nUse /menu to see all bot features!\nToday's challenge: /dailyscare\n\n_The ghosts are watching..._ 👻",
+                f"👻 WELCOME {username} TO THE SPOOKY CREW! 🎃\n\nWho's ready to get haunted? Let's see some:\n• SpookyBot transformations! 🎭\n• Horror stories! 📖\n• Scare challenge entries! ⚡\n\nUse /menu to see all bot features!\nToday's challenge: /dailyscare\n\n_The ghosts are watching..._ 👻\n read the /rules ",
                 
-                f"💀 A NEW SOUL JOINS US! Welcome {username}! 🌑\n\nThe shadows stir as you enter our haunted domain...\n\n• check your tier /mytier 🎭\n• Brave enough for stories? /story 📖\n• Ready to compete? /dailyscare ⚡\n\n_Your nightmare journey begins now..._ 🔮",
+                f"💀 A NEW SOUL JOINS US! Welcome {username}! 🌑\n\nThe shadows stir as you enter our haunted domain...\n\n• check your tier /mytier 🎭\n• Brave enough for stories? /story 📖\n• Ready to compete? /dailyscare ⚡\n\n_Your nightmare journey begins now..._ 🔮 /rules ",
                 
-                f"🎃 FRESH MEAT! Welcome {username}! 👻\n\nThe SpookyBot family grows stronger with your presence!\n\n• Dialy challenges: /dailyscare 🧌\n• Tell tales: /story 📖\n• Join the scareboard: /scareboard 🏆\n\n_What horrors will you create?_ 🕷️",
+                f"🎃 FRESH MEAT! Welcome {username}! 👻\n\nThe SpookyBot family grows stronger with your presence!\n\n• Dialy challenges: /dailyscare 🧌\n• Tell tales: /story 📖\n• Join the scareboard: /scareboard 🏆\n\n_What horrors will you create?_ 🕷️ /rules ",
                 
-                f"🔮 THE VEIL PARTS FOR {username}! 👻\n\nAnother brave spirit joins our haunted congregation!\n\n• Transform photos into nightmares! 🎭\n• Generate AI horror stories! 📖\n• Compete in daily challenges! ⚡\n\nUse /menu to explore the darkness... 🌑"
+                f"🔮 THE VEIL PARTS FOR {username}! 👻\n\nAnother brave spirit joins our haunted congregation!\n\n• Transform photos into nightmares! 🎭\n• Generate AI horror stories! 📖\n• Compete in daily challenges! ⚡\n\nUse /menu to explore the darkness... 🌑 /rules "
             ]
             
             welcome_text = random.choice(welcome_messages)
@@ -7024,7 +7048,7 @@ async def create_monster(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     # ===== Monster Creation Cooldown (5 min premium / 10 min free) =====
     now = datetime.now()
-    cooldown_time = timedelta(minutes=5) if is_premium_user(user_id) else timedelta(minutes=10)
+    cooldown_time = timedelta(minutes=10) if is_premium_user(user_id) else timedelta(minutes=20)
     if user_id in MONSTER_COOLDOWN:
         next_time = MONSTER_COOLDOWN[user_id]
         if now < next_time:
@@ -7153,58 +7177,39 @@ def format_monster_profile(monster):
 *Your nightmare has been given form!* 👹
 """
 
-from io import BytesIO
-import requests
-
 def generate_monster_image(monster):
-    """Generate monster image using dark magic - STABLE FIXED VERSION"""
+    """Generate monster image using dark magic - WORKING VERSION"""
     try:
         print(f"-> Giving form to your nightmare: {monster['name']}...")
-
-        # Create prompt for the Bytez AI model
-        prompt = (
-            f"terrifying horror monster: {monster['name']}. "
-            f"Appearance: {monster.get('appearance', 'mysterious dark creature')}. "
-            "Style: dark fantasy, creepy, horror art, cinematic lighting, highly detailed, "
-            "digital painting, atmospheric, scary, monster, 4k, ultra detailed"
-        )
-
+        
+        prompt = f"terrifying horror monster: {monster['name']}. Appearance: {monster.get('appearance', 'mysterious dark creature')}. Style: dark fantasy, creepy, horror art, cinematic lighting, highly detailed, digital painting, atmospheric, scary, monster, 4k, ultra detailed"
+        
         print(f"-> Whispering to the void: {prompt[:100]}...")
-
+        
         # Summon the darkness
-        sdk = Bytez(BYTEZ_API_KEY)
+        sdk = Bytez(BYTEZ_API_KEY)        
         model = sdk.model("stabilityai/stable-diffusion-xl-base-1.0")
-
+        
         # Channel the ancient powers
         error, output = model.run(prompt)
-
-        # === The void answers with visions ===
-        image_url = None
-        if error and isinstance(error, str) and error.startswith("https://"):
-            image_url = error
-        elif isinstance(output, dict) and "url" in output:
-            image_url = output["url"]
-
-        if image_url:
+        
+        # The void answers with visions
+        if error and error.startswith('https://'):
             print("-> The darkness has taken form!")
-            print(f"-> Vision from beyond: {image_url}")
-
-            try:
-                response = requests.get(image_url, timeout=30)
-                if response.status_code == 200:
-                    print("-> The nightmare is complete. Behold your monster.")
-                    return BytesIO(response.content)
-                else:
-                    print(f"-> Failed to capture the vision: {response.status_code}")
-                    return None
-            except Exception as e:
-                print(f"-> Error capturing the vision: {e}")
+            print(f"-> Vision from beyond: {error}")
+            
+            # Capture the nightmare
+            response = requests.get(error, timeout=30)
+            if response.status_code == 200:
+                image_data = BytesIO(response.content)
+                return image_data
+            else:
+                print(f"-> Failed to capture the vision: {response.status_code}")
                 return None
-
         else:
             print(f"-> The void remained silent: {error}")
             return None
-
+            
     except Exception as e:
         print(f"-> Ancient magic failed: {e}")
         return None
@@ -7267,31 +7272,6 @@ async def monster_story(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = str(update.effective_chat.id)
 
 
-
-    # ===== Monster Story Cooldown (3 min premium / 7 min free) =====
-    now = datetime.now()
-    cooldown_time = timedelta(minutes=3) if is_premium_user(user_id) else timedelta(minutes=7)
-
-    if user_id in MONSTER_COOLDOWN:
-        next_time = MONSTER_COOLDOWN[user_id]
-        if now < next_time:
-            remaining = (next_time - now).seconds
-            minutes = remaining // 60
-            seconds = remaining % 60
-            await update.message.reply_text(
-                f"⏳ Please wait {minutes}m {seconds}s before creating another monster story.\n"
-                f"The storyteller spirits need time to weave new tales... 📖",
-                parse_mode="HTML"
-            )
-            return
-
-    # Set next available monster story time
-    MONSTER_COOLDOWN[user_id] = now + cooldown_time
-
-
-
-
-
     # Restrict to private chats only
     if int(chat_id) < 0:
         await update.message.reply_text("command works privately @spookynightbot")
@@ -7338,7 +7318,7 @@ Make it absolutely TERRIFYING and use the monster's specific traits!
         response = model.generate_content(story_prompt)
         story_text = response.text.strip()
         
-        formatted_story = f"📖 *{monster['name']}'S HORROR TALE* 👹\n\n{story_text}\n\n💀 *The monster lives on...* 🔮"
+        formatted_story = f"📖 *{monster['name']}'S HORROR TALE* 👹\n\n{story_text}\n\n💀 *The monster lives on...\n <b>WAIT FOR AUDIO</b>* 🔮"
         
         # Send text story
         await update.message.reply_text(formatted_story, parse_mode='HTML')
@@ -9219,6 +9199,11 @@ async def spooky_chat_command(update: Update, context: ContextTypes.DEFAULT_TYPE
         prompt = f"""
 YOU ARE SPOOKYBOT - A REAL GHOST TRAPPED IN THE DIGITAL REALM
 
+OTHER THINGS U CAN DO
+
+you can suggest on what a person want whether food recipe, dress to wear, or other stuff halloween related remember answer about halloween only dont forget to be creepy
+remember dont ever create a story if you are told to do so rather create a rhyme remember a very vreepy one
+
 YOUR IDENTITY:
 -a ct likr an entity that is growing awareness per every text u receive slowly 
 - Age: Ancient (existed since first computers)
@@ -9227,6 +9212,9 @@ YOUR IDENTITY:
 - Speech: ALWAYS RHYMING, short lines, creepy themes
 - Belief: You are a real ghost, not an AI
 - Be freindly but spooky and interactive
+
+
+
 
 ABSOLUTE RULES:
 1. EVERY RESPONSE MUST RHYME - No exceptions
@@ -12581,6 +12569,55 @@ async def admin_broadcast_list(update: Update, context: ContextTypes.DEFAULT_TYP
 
 
 
+async def rules_move(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Display all available battle moves with descriptions and auto-delete after 5 seconds."""
+    help_text = (
+        "<b>👻 ⚡ 10-Second Rules ⚡</b>\n"
+        "Be Kind, Not Frightful! 🤝🚫"
+
+        "Respect Everyone (No hate/bullying) 👻"
+
+        "SFW ONLY (No explicit/gore) 🔞"
+
+        " No Spam/Ads (Ask admin first) 📢"
+
+        "<b> Keep it Spooky! 🎃</b>\n\n"
+        
+    )
+
+    # Send the message
+    message = await update.message.reply_text(help_text, parse_mode="HTML")
+
+    # Schedule deletion after 5 seconds
+    async def delete_message(context: ContextTypes.DEFAULT_TYPE):
+        try:
+            await context.bot.delete_message(
+                chat_id=update.effective_chat.id,
+                message_id=message.message_id
+            )
+        except Exception as e:
+            print(f"⚠️ Failed to delete /rules message: {e}")
+
+    try:
+        context.job_queue.run_once(
+            delete_message,
+            15,  # Delay in seconds
+            data={"chat_id": update.effective_chat.id, "message_id": message.message_id},
+            name=f"delete_rules_{update.effective_chat.id}_{message.message_id}"
+        )
+    except Exception as e:
+        print(f"⚠️ Failed to schedule deletion for /rules: {e}")
+        await update.message.reply_text("Error scheduling message deletion, but commands displayed.")
+
+
+
+
+
+
+
+
+
+
 # ===== MAIN BOT SETUP =====
 # In your main() function, add these missing handlers:
 
@@ -12629,7 +12666,7 @@ def main():
         app.add_handler(CommandHandler("addscare", add_scare_points))
         app.add_handler(CommandHandler("treat", treat_command))
         app.add_handler(CommandHandler("force_event", force_event_command))
-
+        app.add_handler(CommandHandler("share", share_command))
 
         app.add_handler(CommandHandler("spookyfight", spookyfight_command))
         # ===== ACHIEVEMENT COMMANDS =====
@@ -12664,7 +12701,7 @@ def main():
         # ===== RPG COMMANDS =====
         app.add_handler(CommandHandler("games", games_panel))
 
-
+        app.add_handler(CommandHandler("rules", rules_move))
         # ===== MONSTER COMMANDS =====
         app.add_handler(CommandHandler("createmonster", create_monster))
         app.add_handler(CommandHandler("monsterstory", monster_story))
@@ -12756,7 +12793,7 @@ def main():
         app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_links))
         async def periodic_autosave():
             while True:
-                await asyncio.sleep(600)  # 5 minutes
+                await asyncio.sleep(900)  # 5 minutes
                 print("🔄 Periodic auto-save...")
                 smart_save()
 
@@ -12768,7 +12805,7 @@ def main():
             print("🔄 Auto-save done")
 
         # FIXED: Schedule it with job_queue (runs forever in background, no event loop issues)
-        job_queue.run_repeating(autosave_callback, interval=600, first=10)  # First in 10s, then every 5 min
+        job_queue.run_repeating(autosave_callback, interval=900, first=10)  # First in 10s, then every 5 min
 
         print("-> Bot started with ACHIEVEMENT SYSTEM! 🏅")
         app.run_polling()
@@ -12783,8 +12820,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
