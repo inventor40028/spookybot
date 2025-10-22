@@ -3,74 +3,95 @@
     "usage": {
       "transformations": 0,
       "stories": 1,
-      "last_reset": "2025-10-14"
-    },
-    "premium": {
-      "active": true,
-      "type": "Admin Grant - 7 days (default)",
-      "expires_at": "2025-10-21T19:23:46.448688",
-      "purchases": [
-        {
-          "type": "Admin Grant - 7 days (default)",
-          "purchased_at": "2025-10-14T19:23:46.448688",
-          "expires_at": "2025-10-21T19:23:46.448688"
-        }
-      ]
-    },
-    "first_name": "Brian",
-    "username": "electrokid_1",
-    "last_seen": "2025-10-15T01:04:38.888930",
-    "achievements": {
-      "unlocked": [],
-      "progress": {
-        "transformations": 0,
-        "stories": 0,
-        "challenge_wins": 0,
-        "members_helped": 0,
-        "leaderboard_top3": 0,
-        "rpg_adventures": 0,
-        "monsters_created": 0
-      }
+      "last_reset": "2025-10-16"
     }
   },
-  "8287395408": {
-    "rpg_character": {
-      "name": "Red the Occult Scholar",
-      "class": "Occult Scholar",
-      "level": 1,
-      "experience": 0,
-      "fear_resistance": 10,
-      "sanity": 100,
-      "inventory": [],
-      "location": "haunted_mansion",
-      "knowledge": 10,
-      "magic": 8
-    },
-    "rpg_inventory": [
-      "Flashlight 🔦"
-    ],
-    "rpg_location": "Shadow Forest 🌲",
-    "rpg_achievements": [],
+  "1147176734": {
+    "first_name": "Josephus",
+    "username": "Joe_xephuxx",
+    "last_seen": "2025-10-15T20:00:42.572303"
+  },
+  "5575478473": {
+    "first_name": "Abraham",
+    "username": "",
+    "last_seen": "2025-10-15T23:41:15.618549"
+  },
+  "8252468784": {
+    "first_name": "Rhyhteous",
+    "username": "",
+    "last_seen": "2025-10-16T00:33:25.216677"
+  },
+  "7839774839": {
     "usage": {
       "transformations": 0,
       "stories": 0,
-      "last_reset": "2025-10-14"
+      "last_reset": "2025-10-20"
     },
-    "last_transform_style": "vampire",
+    "last_transform_style": "vampire"
+  },
+  "8287395408": {
+    "first_name": "Red",
+    "username": "Redlady12",
+    "last_seen": "2025-10-17T03:01:16.396033",
     "premium": {
       "active": true,
       "type": "Admin Grant - 7 days (default)",
-      "expires_at": "2025-10-21T19:31:36.505604",
+      "expires_at": "2025-10-24T07:19:34.161311",
       "purchases": [
         {
           "type": "Admin Grant - 7 days (default)",
-          "purchased_at": "2025-10-14T19:31:36.505604",
-          "expires_at": "2025-10-21T19:31:36.505604"
+          "purchased_at": "2025-10-17T07:19:34.161311",
+          "expires_at": "2025-10-24T07:19:34.161311"
         }
       ]
     },
-    "first_name": "Red",
-    "username": "Redlady12",
-    "last_seen": "2025-10-14T21:58:52.746043"
+    "monster_creation": {
+      "step": "awaiting_description"
+    },
+    "achievements": {
+      "unlocked": [],
+      "progress": {
+        "monsters_created": 1
+      }
+    },
+    "created_monsters": [
+      {
+        "name": "** The Umbral Weaver",
+        "type": "** Supernatural Aberration",
+        "appearance": "** A towering, hooded figure forever shrouded in shadow. Beneath the cowl, where a face should be, is only an oppressive void. Its \"skin\" appears to be roiling, black smoke, constantly shifting and swirling. Skeletal hands, bony and elongated, extend from the sleeves, and its eyes burn with an intense, malevolent red glow. Matted, brown hair, constantly moving like living shadows, spills from beneath the hood. Heavy chains, forged from an unknown, blackened metal, dangle from its wrists, clinking softly even when it stands still.",
+        "powers": "**",
+        "weaknesses": "**",
+        "origin": "** Born from a collective nightmare – a psychic manifestation of centuries of fear, grief, and loss accumulating in a forgotten battlefield. Where the most terrible human acts took place. The residual energy coalesced and took form, fueled by the lingering pain and the constant cycle of negative emotions.",
+        "behavior": "** The Umbral Weaver is a patient predator. It stalks its victims from the periphery, weaving subtle illusions and preying on their insecurities and fears. It prefers to isolate its targets, drawing them into areas of darkness and despair before delivering the final, soul-crushing blow. Often uses its mimicry ability to manipulate its prey.",
+        "fear_level": "** 9/10"
+      }
+    ]
+  },
+  "6723801132": {
+    "first_name": "Hush",
+    "username": "hush_web3",
+    "last_seen": "2025-10-18T14:51:10.960740"
+  },
+  "7969291865": {
+    "first_name": "Brian",
+    "username": "electrokid_2",
+    "last_seen": "2025-10-22T12:37:51.652079",
+    "usage": {
+      "transformations": 0,
+      "stories": 0,
+      "last_reset": "2025-10-22"
+    },
+    "premium": {
+      "active": true,
+      "type": "Admin Grant - 7 days (default)",
+      "expires_at": "2025-10-29T12:47:27.652969",
+      "purchases": [
+        {
+          "type": "Admin Grant - 7 days (default)",
+          "purchased_at": "2025-10-22T12:47:27.652969",
+          "expires_at": "2025-10-29T12:47:27.652969"
+        }
+      ]
+    }
   }
 }
