@@ -4,7 +4,10 @@
       "transformations": 0,
       "stories": 1,
       "last_reset": "2025-10-16"
-    }
+    },
+    "first_name": "Brian",
+    "username": "electrokid_1",
+    "last_seen": "2025-10-28T01:14:56.658092"
   },
   "1147176734": {
     "first_name": "Josephus",
@@ -32,7 +35,7 @@
   "8287395408": {
     "first_name": "Red",
     "username": "Redlady12",
-    "last_seen": "2025-10-17T03:01:16.396033",
+    "last_seen": "2025-10-27T21:51:43.378733",
     "premium": {
       "active": true,
       "type": "Admin Grant - 7 days (default)",
@@ -65,7 +68,12 @@
         "behavior": "** The Umbral Weaver is a patient predator. It stalks its victims from the periphery, weaving subtle illusions and preying on their insecurities and fears. It prefers to isolate its targets, drawing them into areas of darkness and despair before delivering the final, soul-crushing blow. Often uses its mimicry ability to manipulate its prey.",
         "fear_level": "** 9/10"
       }
-    ]
+    ],
+    "spookyfight_stats": {
+      "wins": 1,
+      "losses": 3,
+      "draws": 0
+    }
   },
   "6723801132": {
     "first_name": "Hush",
@@ -93,5 +101,75 @@
         }
       ]
     }
+  },
+  "5533107624": {
+    "achievements": {
+      "unlocked": [],
+      "progress": {
+        "transformations": 0,
+        "stories": 0,
+        "challenge_wins": 0,
+        "members_helped": 0,
+        "leaderboard_top3": 0,
+        "rpg_adventures": 0,
+        "monsters_created": 0
+      }
+    },
+    "premium": {
+      "active": true,
+      "type": "Admin Grant - 7 days (default)",
+      "expires_at": "2025-11-03T22:12:40.803783",
+      "purchases": [
+        {
+          "type": "Admin Grant - 7 days (default)",
+          "purchased_at": "2025-10-27T22:12:40.803783",
+          "expires_at": "2025-11-03T22:12:40.803783"
+        }
+      ]
+    }
+  },
+  "1763749099": {
+    "first_name": "𝐍𝐘",
+    "username": "darkthou",
+    "last_seen": "2025-10-27T21:52:53.747297",
+    "premium": {
+      "active": true,
+      "type": "Admin Grant - 7 days (default)",
+      "expires_at": "2025-11-03T22:11:38.540047",
+      "purchases": [
+        {
+          "type": "Admin Grant - 7 days (default)",
+          "purchased_at": "2025-10-27T22:11:38.540047",
+          "expires_at": "2025-11-03T22:11:38.540047"
+        }
+      ]
+    }
+  },
+  "7974379074": {
+    "first_name": "Calliope",
+    "username": "sicecal",
+    "last_seen": "2025-10-27T22:19:56.558547",
+    "premium": {
+      "active": true,
+      "type": "Admin Grant - 7 days (default)",
+      "expires_at": "2025-11-03T22:21:28.793807",
+      "purchases": [
+        {
+          "type": "Admin Grant - 7 days (default)",
+          "purchased_at": "2025-10-27T22:21:28.793807",
+          "expires_at": "2025-11-03T22:21:28.793807"
+        }
+      ]
+    }
+  },
+  "7913628527": {
+    "first_name": "Node js",
+    "username": "notordinary82",
+    "last_seen": "2025-10-28T01:17:01.024608"
+  },
+  "8295537387": {
+    "first_name": "Clove🌷",
+    "username": "CloveSydney",
+    "last_seen": "2025-10-28T17:37:00.492724"
   }
 }
